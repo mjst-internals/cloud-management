@@ -1,4 +1,15 @@
-# powershell-script to configure SSH-Firewall rules for Hetzner before connecting via ssh
+<#
+    .SYNOPSIS
+        Hetzner cloud ssh and firewall configuration script.
+    .DESCRIPTION
+        Script to configure SSH-Firewall rules via Hetzner hcloud
+        before connecting to the server console via ssh.
+        Requires hcloud to be installed and configured with an writeable access-token.
+    .EXAMPLE
+        PS> hssh -project <project> -destination <server-name or ip> -user <ssh-user>
+        Determines your local IP, updates the Hetzner firewall-rule within 'project'
+        and connects via ssh to 'ssh-user@destination'.
+#>
 param(
     # Hetzner project name
     [Parameter(Mandatory=$true)]
