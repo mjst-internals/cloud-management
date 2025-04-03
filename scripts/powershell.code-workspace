@@ -1,7 +1,10 @@
 {
 	"folders": [
-		{
-			"path": "powershell"
-		}
-	]
+        {
+            "path": "powershell"
+        },
+        {
+            "path": "bash"
+        }
+    ]
 }
