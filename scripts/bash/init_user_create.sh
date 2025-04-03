@@ -45,6 +45,12 @@ do
     esac
 done
 
+# check, if user already exists
+if id "${user_name}" &>/dev/null
+then
+    echo "User ${user_name} already exists!"
+    exit 1
+fi
 
 # create user and immediately expire password to force a change on login
 useradd --create-home --shell "/bin/bash" --groups sudo "${user_name}"
