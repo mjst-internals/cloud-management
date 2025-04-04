@@ -51,4 +51,4 @@ bash "$script_dir"/cm-cloud-init-user-create.sh --user "${user_name}"
 # harden ssh configuration
 bash "$script_dir"/cm-hardening-ssh.sh --user "${user_name}"
 # enable ufw
-bash "$script_dir"/cm-hardening-firewal.sh
+bash "$script_dir"/cm-hardening-firewall.sh

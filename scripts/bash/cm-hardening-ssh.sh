@@ -63,15 +63,15 @@ declare -A properties
 properties["PermitRootLogin"]="no";
 # disable password authentication altogether
 properties["PasswordAuthentication"]="no";
-# set LogLevel to 'verbose'
+# set LogLevel to verbose
 properties["LogLevel"]="VERBOSE";
 # set ClientAliveInterval to 300 seconds
 properties["ClientAliveInterval"]="300";
 # set KbdInteractiveAuthentication to no
 properties["KbdInteractiveAuthentication"]="no";
 properties["ChallengeResponseAuthentication"]="no";
-# limit failed login attempts
-properties["MaxAuthTries"]="2";
+# limit failed authentication trials => DO NOT MESS WITH THIS SETTING!
+#properties["MaxAuthTries"]="6";
 # disallow forwarding
 properties["AllowTcpForwarding"]="no";
 properties["X11Forwarding"]="no";
