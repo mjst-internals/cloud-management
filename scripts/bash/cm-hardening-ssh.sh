@@ -51,8 +51,13 @@ readonly DATE_STRING=$(date +"[%F %T]");
 readonly INFO_STRING="# modified ${DATE_STRING} by $0";
 cp "${CONFIG_FILE}" "${CONFIG_FILE}.${DATE_STRING}.bak";
 
-# declare properties to set
+
+# declare properties to set in sshd_config
 declare -A properties
+
+# recommendations by: https://community.hetzner.com/tutorials/basic-cloud-config#step-43--harden-ssh
+# further recommendations from: ChatGPT
+# note: we DO NOT mess with the port numbers. It seems like "security by obscurity".
 
 # disable SSH login as root
 properties["PermitRootLogin"]="no";
@@ -62,6 +67,17 @@ properties["PasswordAuthentication"]="no";
 properties["LogLevel"]="VERBOSE";
 # set ClientAliveInterval to 300 seconds
 properties["ClientAliveInterval"]="300";
+# set KbdInteractiveAuthentication to no
+properties["KbdInteractiveAuthentication"]="no";
+properties["ChallengeResponseAuthentication"]="no";
+# limit failed login attempts
+properties["MaxAuthTries"]="2";
+# disallow forwarding
+properties["AllowTcpForwarding"]="no";
+properties["X11Forwarding"]="no";
+# note: agent forwarding could be useful for development servers!
+properties["AllowAgentForwarding"]="no";
+
 
 # iterate over properties
 for key in "${!properties[@]}"; do
