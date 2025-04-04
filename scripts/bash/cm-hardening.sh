@@ -15,6 +15,7 @@
 ##
 ## Notes:
 ##      - Runs the scripts with default params (except for the allowed user)
+##      - Uses whoami, if no user is passed
 ## =================================================================================================
 set -euo pipefail
 
@@ -37,6 +38,13 @@ do
             ;;            
     esac
 done
+
+if [[ -z "$user_name" ]]
+then
+    user_name=$(whoami);
+fi
+
+script_dir="$(dirname "${BASH_SOURCE[0]}")";
 
 bash "$script_dir"/cm-hardening-ssh.sh --user "${user_name}"
 bash "$script_dir"/cm-hardening-firewall.sh
