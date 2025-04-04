@@ -41,6 +41,28 @@ This isn't a framework. It's a collection of small tools and config snippets tha
 
 ## 🚀 Getting Started
 
+### Downloading releases
+
+#### Windows
+
+coming soon... or maybe not 🤔
+
+#### Linux
+
+Simply copy the file [`cm-update-bash.sh`](https://github.com/mjst-internals/cloud-management/blob/badb39797b09c25fdc9476174fdd2c1af8cb3c7f/scripts/bash/cm-update-bash.sh) from [scripts/bash](https://github.com/mjst-internals/cloud-management/blob/badb39797b09c25fdc9476174fdd2c1af8cb3c7f/scripts/bash/) into your `$HOME` directory and execute it as `sudo`:
+
+```bash
+```  sudo bash ~/cm-update-bash.sh
+```
+
+#### Linux: Use cloud-maintenance as cloud-config
+
+Paste the contents from the template file [cloud-config.yaml](https://github.com/mjst-internals/cloud-management/blob/badb39797b09c25fdc9476174fdd2c1af8cb3c7f/scripts/bash/templates/cloud-config.yaml) to the cloud-config section of your cloud-provider:
+
+![image](https://github.com/user-attachments/assets/c09dc391-ec73-4c54-9434-bb707f8154f2)
+
+### Cloning from source
+
 Clone the repo, skim the scripts, customize to your needs.
 
 ```bash
