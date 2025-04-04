@@ -1,18 +1,23 @@
 #cloud-config
 
+# curl and jq are required for the script to find the cloud-management releases
 packages:
     - curl
     - jq
 
+# creates a script that downloads cloud-management from GitHub releases,
+# provides cm-cloud-init-scripts,
+# and executes them
+# do not forget to change USER_NAME to a desired user name!
 write_files:
-    - path: /opt/cloud-management-init.sh
+    - path: /opt/cloud-management-setup.sh
       permissions: '0755'
       owner: root:root
       content: |
         #!/bin/bash
         set -euo pipefail
 
-        LOG_FILE="/var/log/cloud-management-init.log"
+        LOG_FILE="/var/log/cloud-management-setup.log"
         exec > >(tee -a "$LOG_FILE") 2>&1
         set -x
 
@@ -33,8 +38,8 @@ write_files:
         chmod +x /opt/cloud-management/scripts/bash/*
 
         echo "Running init script...";
-        bash /opt/cloud-management/scripts/bash/init.sh --user "${USER_NAME}";
+        bash /opt/cloud-management/scripts/bash/cm-cloud-init.sh --user "${USER_NAME}";
 
 runcmd:
-    - /opt/cloud-management-init.sh
+    - /opt/cloud-management-setup.sh
 

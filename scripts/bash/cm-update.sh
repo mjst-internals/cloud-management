@@ -2,11 +2,9 @@
 ## =================================================================================================
 ## Description : Quick apt update && upgrade
 ## Author      : Michael J. Stallinger
-## Version     : 0.0.1
-## License     : MIT
 ## =================================================================================================
 ## Usage:
-##      ./update.sh
+##      ./cm-update.sh
 ##
 ## Requirements:
 ##      - Bash

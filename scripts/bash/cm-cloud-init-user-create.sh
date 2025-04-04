@@ -1,12 +1,10 @@
 #!/bin/bash
 ## =================================================================================================
-## Description : First server start initialization script
+## Description : Creates a new user and moves the initial key files from root
 ## Author      : Michael J. Stallinger
-## Version     : 0.0.1
-## License     : MIT
 ## =================================================================================================
 ## Usage:
-##      ./init.sh [--user <user_name>]
+##      ./cm-cloud-init-user-create.sh --user <user_name>
 ##
 ## Parameters:
 ##      --user <user_name>      user to be created
@@ -15,7 +13,7 @@
 ##      - Bash
 ##
 ## Notes:
-##      - Make sure you have appropriate rights to execute the script.
+##      - Make sure you have appropriate rights to execute the script!
 ## =================================================================================================
 set -euo pipefail
 
@@ -45,9 +43,22 @@ do
     esac
 done
 
-script_dir="$(dirname "${BASH_SOURCE[0]}")";
+# check, if user already exists
+if id "${user_name}" &>/dev/null
+then
+    echo "User ${user_name} already exists!"
+    exit 1
+fi
 
-# create new user and move keys over
-bash "$script_dir"/init_user_create.sh --user "${user_name}"
-# harden ssh configuration
-bash "$script_dir"/hardening_ssh.sh --user "${user_name}"
+# create user and immediately expire password to force a change on login
+useradd --create-home --shell "/bin/bash" --groups sudo "${user_name}"
+passwd --delete "${user_name}"
+chage --lastday 0 "${user_name}"
+
+# create SSH directory for sudo user and move keys over
+home_directory="$(eval echo ~${user_name})"
+mkdir --parents "${home_directory}/.ssh"
+cp /root/.ssh/authorized_keys "${home_directory}/.ssh"
+chmod 0700 "${home_directory}/.ssh"
+chmod 0600 "${home_directory}/.ssh/authorized_keys"
+chown --recursive "${user_name}":"${user_name}" "${home_directory}/.ssh"
