@@ -45,7 +45,9 @@ do
     esac
 done
 
+script_dir="$(dirname "${BASH_SOURCE[0]}")";
+
 # create new user and move keys over
-bash ./init_user_create.sh --user "${user_name}"
+bash "$script_dir"/init_user_create.sh --user "${user_name}"
 # harden ssh configuration
-bash ./hardening_ssh.sh --user "${user_name}"
+bash "$script_dir"/hardening_ssh.sh --user "${user_name}"
