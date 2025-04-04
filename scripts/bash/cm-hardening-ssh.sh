@@ -1,6 +1,6 @@
 #!/bin/bash
 ## =================================================================================================
-## Description : Configures sshd settings for server hardening.
+## Description : Hardening settings for SSH/SSHD
 ## Author      : Michael J. Stallinger
 ## =================================================================================================
 ## Usage:
