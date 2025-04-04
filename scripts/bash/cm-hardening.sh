@@ -1,20 +1,20 @@
 #!/bin/bash
 ## =================================================================================================
-## Description : First server start initialization script
+## Description : Collection of all hardening scripts
 ## Author      : Michael J. Stallinger
 ## =================================================================================================
 ## Usage:
-##      ./cm-cloud-init.sh [--user <user_name>]
+##      ./cm-hardening.sh [--user <user_name>]
 ##
 ## Parameters:
-##      --user <user_name>      user to be created
+##      --user <user_name>      optional, make sure to pass an existing user
 ##
 ## Requirements:
-##      - Bash
+##      - bash
 ##      - requirements of subsequently called scripts
 ##
 ## Notes:
-##      - Make sure you have appropriate rights to execute the script.
+##      - Runs the scripts with default params (except for the allowed user)
 ## =================================================================================================
 set -euo pipefail
 
@@ -25,12 +25,6 @@ do
     case "$1" in
         --user)
             user_name="$(echo "$2" | xargs)"; # trim user_name
-            # check for username
-            if [ -z "${user_name}" ]
-            then
-                echo "Required argument: --user"
-                exit 1    
-            fi
             shift 2;
             ;;
         -h|--help)
@@ -44,11 +38,6 @@ do
     esac
 done
 
-script_dir="$(dirname "${BASH_SOURCE[0]}")";
-
-# create new user and move keys over
-bash "$script_dir"/cm-cloud-init-user-create.sh --user "${user_name}"
-# harden ssh configuration
 bash "$script_dir"/cm-hardening-ssh.sh --user "${user_name}"
-# enable ufw
-bash "$script_dir"/cm-hardening-firewal.sh
+bash "$script_dir"/cm-hardening-firewall.sh
+bash "$script_dir"/cm-hardening-fail2ban.sh
