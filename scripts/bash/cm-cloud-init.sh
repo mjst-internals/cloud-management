@@ -49,6 +49,6 @@ script_dir="$(dirname "${BASH_SOURCE[0]}")";
 # create new user and move keys over
 bash "$script_dir"/cm-cloud-init-user-create.sh --user "${user_name}"
 # harden ssh configuration
-bash "$script_dir"/cm-hardening-ssh.sh --user "${user_name}"
+#bash "$script_dir"/cm-hardening-ssh.sh --user "${user_name}"
 # enable ufw
-bash "$script_dir"/cm-hardening-firewall.sh
+#bash "$script_dir"/cm-hardening-firewall.sh
