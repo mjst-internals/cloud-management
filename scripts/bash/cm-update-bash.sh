@@ -9,7 +9,7 @@
 ## Requirements:
 ##      - Bash
 ##      - curl
-##      - cp
+##      - jq
 ##
 ## Notes:
 ##      - Some commands require sudo
@@ -17,7 +17,7 @@
 set -euo pipefail
 
 sudo apt update
-sudo apt install -y curl cp
+sudo apt install -y curl jq
 
 readonly REPO="mjst-internals/cloud-management";
 readonly TAR_FILE="cloud-management.tar.gz";
