@@ -2,11 +2,9 @@
 ## =================================================================================================
 ## Description : Configures sshd settings for server hardening.
 ## Author      : Michael J. Stallinger
-## Version     : 0.0.2
-## License     : MIT
 ## =================================================================================================
 ## Usage:
-##      ./hardening_ssh.sh [--user <user_name>] [--skip-restart]
+##      ./cm-hardening-ssh.sh [--user <user_name>] [--skip-restart]
 ##
 ## Parameters:
 ##      --user <user_name>      optional, make sure to pass an existing user
