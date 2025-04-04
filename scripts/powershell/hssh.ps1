@@ -18,7 +18,9 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$destination,
     # user to connect ssh with
-    [string]$user
+    [string]$user,
+    # skip firewall-update?
+    [switch]$skipUpdate
 )
 
 # defaults
@@ -68,7 +70,11 @@ function Connect-Ssh
 try
 {
     # update firewall rule
-    Set-FirewallConfiguration -project $project -firewall_name $DEFAULT_FIREWALL_NAME -source_ip (Get-LocalIp);
+    if ($skipUpdate)  {
+        Write-Output "Skipping firewall update ...";
+    } else {
+        Set-FirewallConfiguration -project $project -firewall_name $DEFAULT_FIREWALL_NAME -source_ip (Get-LocalIp);
+    }
     # establish connection
     if (!$user) { $user = $DEFAULT_USER; }
     Connect-Ssh -user $user -destination $destination;
