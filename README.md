@@ -26,7 +26,7 @@ Think of it as your personal DevOps toolbox — no frameworks, no overengineerin
 
 scripts/<br>
 ├─ powershell/ `# on Windows`<br>
-├─ bash/ `# on Unix/Linux`<br>
+├─ bash/ `# on Unix/Linux` (details see: [cm-scripts.md](https://github.com/mjst-internals/cloud-management/blob/ad8654a22e205cd00ecafb09f71aba204d9fafc8/docs/bash/cm-scripts.md)) <br>
 
 ---
 
