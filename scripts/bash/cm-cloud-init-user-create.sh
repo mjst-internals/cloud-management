@@ -17,6 +17,11 @@
 ## =================================================================================================
 set -euo pipefail
 
+# set debug-log
+LOG_FILE="/var/log/cloud-management-setup.log"
+exec > >(tee -a "$LOG_FILE") 2>&1
+set -x
+
 # arguments
 user_name="";
 while [[ $# -gt 0 ]]

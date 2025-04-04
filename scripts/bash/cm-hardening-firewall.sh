@@ -40,7 +40,7 @@ do
         *)
             echo "Unknown argument: $1"
             exit 1
-            ;;            
+            ;;
     esac
 done
 
