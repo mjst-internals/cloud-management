@@ -17,10 +17,6 @@ write_files:
         #!/bin/bash
         set -euo pipefail
 
-        LOG_FILE="/var/log/cloud-management-setup.log"
-        exec > >(tee -a "$LOG_FILE") 2>&1
-        set -x
-
         USER_NAME="mjs"; # pick a username you won’t hate tomorrow
 
         REPO="mjst-internals/cloud-management";
