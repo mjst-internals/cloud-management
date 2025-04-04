@@ -53,6 +53,10 @@ script_dir="$(dirname "${BASH_SOURCE[0]}")";
 
 # create new user and move keys over
 bash "$script_dir"/cm-cloud-init-user-create.sh --user "${user_name}"
+
+# finiah cm installation in user-context
+sudo -u "${user_name}" bash -c "${script_dir}/cm-update-bash.sh --path-only"
+
 # harden ssh configuration
 #bash "$script_dir"/cm-hardening-ssh.sh --user "${user_name}"
 # enable ufw
