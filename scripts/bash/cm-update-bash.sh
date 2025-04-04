@@ -12,9 +12,12 @@
 ##      - cp
 ##
 ## Notes:
-##      - Make sure to start with sudo!
+##      - Some commands require sudo
 ## =================================================================================================
 set -euo pipefail
+
+sudo apt update
+sudo apt install -y curl cp
 
 readonly REPO="mjst-internals/cloud-management";
 readonly TAR_FILE="cloud-management.tar.gz";
@@ -27,12 +30,11 @@ echo "Downloading latest release (${latest}) into '${TAR_FILE}'...";
 curl -L "https://github.com/${REPO}/archive/refs/tags/${latest}.tar.gz" -o "${TAR_FILE}";
 
 echo "Extracting scripts to '${DESTINATION}'...";
-mkdir -p "${DESTINATION}";
-tar -xzf "${TAR_FILE}" -C "${DESTINATION}" --strip-components=1 --wildcards "cloud-management-*${SCRIPTS_SUBDIR}/";
+sudo mkdir -p "${DESTINATION}";
+sudo tar -xzf "${TAR_FILE}" -C "${DESTINATION}" --strip-components=1 --wildcards "cloud-management-*${SCRIPTS_SUBDIR}/";
 
 echo "Setting permissions...";
-chmod +x "${DESTINATION}/*";
-chmod +x "${SCRIPTS_DIR}/*";
+sudo chmod +x ${SCRIPTS_DIR}/*;
 
 echo "Checking path environment...";
 readonly EXPORT_LINE="export PATH=\"${SCRIPTS_DIR}:\$PATH\"";
