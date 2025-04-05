@@ -35,17 +35,14 @@ do
         *)
             echo "Unknown argument: $1"
             exit 1
-            ;;            
+            ;;
     esac
 done
 
-if [[ -z "$user_name" ]]
-then
-    user_name=$(whoami);
-fi
-
 script_dir="$(dirname "${BASH_SOURCE[0]}")";
 
-bash "$script_dir"/cm-hardening-ssh.sh --user "${user_name}"
-bash "$script_dir"/cm-hardening-firewall.sh
-bash "$script_dir"/cm-hardening-fail2ban.sh
+sudo bash -c "${script_dir}/cm-hardening-rmpwd.sh $@";
+sudo bash -c "${script_dir}/cm-hardening-ssh.sh $@";
+sudo bash -c "${script_dir}/cm-hardening-fail2ban.sh $@";
+# must be the last statement, because ufw enable sets
+sudo bash -c "${script_dir}/cm-hardening-firewall.sh $@";
