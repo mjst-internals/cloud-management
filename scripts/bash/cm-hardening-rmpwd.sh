@@ -1,22 +1,17 @@
 #!/bin/bash
 ## =================================================================================================
-## Description : Hardening: installs fail2ban
+## Description : Removes the password from root user
 ## Author      : Michael J. Stallinger
 ## =================================================================================================
 ## Usage:
-##      ./cm-hardening-fail2ban.sh
+##      ./cm-hardening-rmpwd.sh
 ##
 ## Requirements:
 ##      - bash
-##      - fail2ban
 ##
 ## Notes:
 ##      - 
 ## =================================================================================================
 set -euo pipefail
 
-# install
-sudo apt update && sudo apt install -y fail2ban
-# enable & start
-sudo systemctl enable fail2ban
-sudo systemctl start fail2ban
+sudo passwd -d root

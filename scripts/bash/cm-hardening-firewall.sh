@@ -37,10 +37,6 @@ do
             grep '^##' "$0" | sed 's/^## \{0,1\}//';
             exit 0;
             ;;
-        *)
-            echo "Unknown argument: $1"
-            exit 1
-            ;;
     esac
 done
 
@@ -49,7 +45,8 @@ sudo apt update && sudo apt install -y ufw
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 # always set SSH 22
-sudo ufw allow 22/tcp
+sudo ufw allow 22/tcp # fallback
+sudo ufw allow OpenSSH
 # set HTTP/HTTPS port allowance
 if [ "${add_https}" = "true" ]
 then

@@ -4,10 +4,10 @@
 ## Author      : Michael J. Stallinger
 ## =================================================================================================
 ## Usage:
-##      ./cm-hardening-ssh.sh [--user <user_name>] [--skip-restart]
+##      ./cm-hardening-ssh.sh --user <user_name> [--skip-restart]
 ##
 ## Parameters:
-##      --user <user_name>      optional, make sure to pass an existing user
+##      --user <user_name>      required: make sure to pass an existing user
 ##      --skip-restart          optional, does not test and restart the sshd service (for now)
 ##
 ## Requirements:
@@ -32,16 +32,17 @@ do
             ;;
         --user)
             user_name="$(echo "$2" | xargs)"; # trim user_name
+            if [ -z "${user_name}" ]
+            then
+                echo "Required argument: --user"
+                exit 1
+            fi
             shift 2;
             ;;
         -h|--help)
             grep '^##' "$0" | sed 's/^## \{0,1\}//';
             exit 0;
             ;;
-        *)
-            echo "Unknown argument: $1"
-            exit 1
-            ;;            
     esac
 done
 
