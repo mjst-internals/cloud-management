@@ -1,0 +1,13 @@
+[Unit]
+Description=Minecraft Bedrock Server Hotel World
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/home/minecraft/bedrock-hotel
+ExecStart=/home/minecraft/bedrock-hotel/bedrock_server
+Restart=on-failure
+Nice=5
+
+[Install]
+WantedBy=multi-user.target
