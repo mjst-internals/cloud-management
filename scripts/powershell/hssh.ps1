@@ -23,6 +23,11 @@ param(
     [switch]$skipUpdate
 )
 
+
+# todo: add rule but not overwrite it
+# todo: check, if rule already exists, define firewall name or create it, if it doesn't exist
+
+
 # defaults
 Set-Variable -Name "DEFAULT_FIREWALL_NAME" -Value "firewall-ssh" -Option Constant -Scope Local
 Set-Variable -Name "DEFAULT_USER" -Value "mjs" -Option Constant -Scope Local
